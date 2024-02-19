@@ -27,12 +27,10 @@ class HomeController extends Controller
             return back()->withErrors(['error' => 'Token not found']);
         }
         
-        $barberUrl = 'https://api.doorcutapp.com/api/barberProfile/getAll';
-
-        $clientUrl = 'https://api.doorcutapp.com/api/clientProfile/getAll';
-
-        $servicesUrl = 'https://api.doorcutapp.com/api/service/getAll';
-
+        $barberUrl = Config::get('app.barber_api_url');
+        $clientUrl = Config::get('app.client_api_url');
+        $servicesUrl = Config::get('app.services_api_url');
+        
         $requestBody = [
             'pageNo' => 1,
             'size' => 20,
