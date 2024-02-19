@@ -18,16 +18,17 @@ class ClientController extends Controller
                 return back()->withErrors(['error' => 'Token not found']);
             }
             // Create a Guzzle client
+            $apiUrl = Config::get('app.client_delete_api_url');
             $client = new Client();
 
-            // Make an HTTP request to the external API endpoint for deletion
-            $response = $client->delete("https://api.doorcutapp.com/api/clientProfile/delete?id={$id}", [
+            $response = $client->delete("{$apiUrl}?id={$id}", [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $bearerToken,
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
                 ],
             ]);
+
 
             // Check if the request was successful
             if ($response->getStatusCode() == 200) {

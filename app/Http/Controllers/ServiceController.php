@@ -17,11 +17,11 @@ class ServiceController extends Controller
             if (!$bearerToken) {
                 return back()->withErrors(['error' => 'Token not found']);
             }
-            // Create a Guzzle client
+
+            $apiUrl = Config::get('app.service_delete_api_url');
             $client = new Client();
 
-            // Make an HTTP request to the external API endpoint for deletion
-            $response = $client->delete("https://api.doorcutapp.com/api/service/delete?id={$id}", [
+            $response = $client->delete("{$apiUrl}?id={$id}", [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $bearerToken,
                     'Accept' => 'application/json',
@@ -56,13 +56,13 @@ class ServiceController extends Controller
                 return back()->withErrors(['error' => 'Token not found']);
             }
             // Retrieve service name from the request
+            
+           $apiUrl = Config::get('app.service_save_api_url');
             $serviceName = $request->input('serviceName');
 
-            // Create a Guzzle client
             $client = new Client();
 
-            // Make an HTTP request to the external API endpoint for service creation
-            $response = $client->post('https://api.doorcutapp.com/api/service/save', [
+            $response = $client->post($apiUrl, [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $bearerToken,
                     'Accept' => 'application/json',

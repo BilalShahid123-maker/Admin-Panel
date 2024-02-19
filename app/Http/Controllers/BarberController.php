@@ -18,10 +18,10 @@ class BarberController extends Controller
                 return back()->withErrors(['error' => 'Token not found']);
             }
             // Create a Guzzle client
+            $apiUrl = Config::get('app.barber_delete_api_url');
             $client = new Client();
 
-            // Make an HTTP request to the external API endpoint for deletion
-            $response = $client->delete("https://api.doorcutapp.com/api/barberProfile/delete?id={$id}", [
+            $response = $client->delete("{$apiUrl}?id={$id}", [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $bearerToken,
                     'Accept' => 'application/json',
@@ -52,10 +52,10 @@ class BarberController extends Controller
                 return back()->withErrors(['error' => 'Token not found']);
             }
             // Create a Guzzle client
+            $apiUrl = Config::get('app.barber_approve_api_url');
             $client = new Client();
 
-            // Make an HTTP request to the external API endpoint for approval
-            $response = $client->post("https://api.doorcutapp.com/api/barberApproval/approve?userId={$userId}", [
+            $response = $client->post("{$apiUrl}?userId={$userId}", [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $bearerToken,
                     'Accept' => 'application/json',
@@ -85,11 +85,11 @@ class BarberController extends Controller
             if (!$bearerToken) {
                 return back()->withErrors(['error' => 'Token not found']);
             }
-            // Create a Guzzle client
+            
+            $apiUrl = Config::get('app.barber_block_api_url');
             $client = new Client();
 
-            // Make an HTTP request to the external API endpoint for blocking
-            $response = $client->post("https://api.doorcutapp.com/api/barberApproval/block", [
+            $response = $client->post($apiUrl, [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $bearerToken,
                     'Accept' => 'application/json',

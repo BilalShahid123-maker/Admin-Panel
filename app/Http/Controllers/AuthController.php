@@ -15,7 +15,7 @@ class AuthController extends Controller
     ]);
 
     try {
-        $apiBaseUrl = 'https://api.doorcutapp.com/api/auth';
+        $apiBaseUrl = Config::get('app.auth_api_url');
 
         $client = new Client();
 
@@ -73,7 +73,7 @@ public function adminedit()
         ]);
     
         try {
-            $apiBaseUrl = 'https://api.doorcutapp.com/api/auth';
+            $apiBaseUrl = Config::get('app.edit_admin_api_url');
             $client = new Client();
     
             $userDetails = session('user');
