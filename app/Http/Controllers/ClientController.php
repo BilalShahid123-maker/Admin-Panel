@@ -18,7 +18,7 @@ class ClientController extends Controller
                 return back()->withErrors(['error' => 'Token not found']);
             }
             // Create a Guzzle client
-            $apiUrl = config('app.client_delete_api_url');
+            $apiUrl = env('CLIENT_DELETE_API_URL');
             $client = new Client();
 
             $response = $client->delete("{$apiUrl}?id={$id}", [

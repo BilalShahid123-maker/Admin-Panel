@@ -15,11 +15,12 @@ class AuthController extends Controller
     ]);
 
     try {
-        $apiBaseUrl = config('app.auth_api_url');
+
+        $apiBaseUrl = env('AUTH_API_URL');  
 
         $client = new Client();
 
-        $response = $client->post("{$apiBaseUrl}/login", [
+        $response = $client->post($apiBaseUrl, [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
@@ -49,12 +50,22 @@ class AuthController extends Controller
     }
 }
 
-public function logout2()
+public function logout2(Request $request)
 {
-    session()->forget('user');
+    $request->session()->regenerate(); // Regenerate the session ID
+    session()->forget('user'); 
+    session()->forget('token');
+    // Remove the 'user' key from the session
+    session()->flush(); // Clear the entire session data
 
-    return redirect()->route('login2');
+    return redirect()->route('login2')->withHeaders([
+        'Cache-Control' => 'no-cache, no-store, must-revalidate',
+        'Pragma' => 'no-cache',
+        'Expires' => '0',
+    ]);
 }
+
+
 
 public function adminedit()
     {
@@ -73,7 +84,7 @@ public function adminedit()
         ]);
     
         try {
-            $apiBaseUrl = config('app.edit_admin_api_url');
+            $apiBaseUrl = env('EDIT_ADMIN_API_URL');
             $client = new Client();
     
             $userDetails = session('user');

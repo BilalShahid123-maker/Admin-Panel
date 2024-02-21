@@ -22,6 +22,9 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
   <title>
   @yield('title')
 </title>
@@ -131,14 +134,14 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              
-                <a class="dropdown-item" href="{{ route('logout2') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                  Logout
-              </a>
-              <form id="logout-form" action="{{ route('logout2') }}" method="POST" style="display: none;">
-                  @csrf
-              </form>
-                </div>
+                  <a class="dropdown-item" href="{{ route('logout2') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      Logout
+                  </a>
+                  <form id="logout-form" action="{{ route('logout2') }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
+              </div>
+
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{route('admin.edit')}}">
@@ -203,8 +206,14 @@
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <script src="../assets/demo/demo.js"></script>
+  <script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
 
 @yield('scripts')
+
 
 </body>
 

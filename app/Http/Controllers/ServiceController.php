@@ -18,7 +18,7 @@ class ServiceController extends Controller
                 return back()->withErrors(['error' => 'Token not found']);
             }
 
-            $apiUrl = config('app.service_delete_api_url');
+            $apiUrl = env('SERVICE_DELETE_API_URL');
             $client = new Client();
 
             $response = $client->delete("{$apiUrl}?id={$id}", [
@@ -57,7 +57,7 @@ class ServiceController extends Controller
             }
             // Retrieve service name from the request
 
-           $apiUrl = config('app.service_save_api_url');
+           $apiUrl = env('SERVICE_SAVE_API_URL');
             $serviceName = $request->input('serviceName');
 
             $client = new Client();

@@ -27,9 +27,9 @@ class HomeController extends Controller
             return back()->withErrors(['error' => 'Token not found']);
         }
         
-        $barberUrl = config('app.barber_api_url');
-        $clientUrl = config('app.client_api_url');
-        $servicesUrl = config('app.services_api_url');
+        $barberUrl = env('BARBER_API_URL');
+        $clientUrl = env('CLIENT_API_URL');
+        $servicesUrl = env('SERVICES_API_URL');
         
         $requestBody = [
             'pageNo' => 1,
@@ -40,11 +40,8 @@ class HomeController extends Controller
         $servicesRequestBody = [
             "pageNo" => 1,
             "size" => 20,
-            "search" => "string",
-            "isPagination" => true,
-            "sortBy" => "string",
-            "sortDirection" => "string",
-            "id" => 0
+            "isPagination" => true
+            
         ];
 
         $client = new Client();
