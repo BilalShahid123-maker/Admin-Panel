@@ -52,11 +52,10 @@ class AuthController extends Controller
 
 public function logout2(Request $request)
 {
-    $request->session()->regenerate(); // Regenerate the session ID
+    $request->session()->regenerate();
     session()->forget('user'); 
     session()->forget('token');
-    // Remove the 'user' key from the session
-    session()->flush(); // Clear the entire session data
+    session()->flush(); 
 
     return redirect()->route('login2')->withHeaders([
         'Cache-Control' => 'no-cache, no-store, must-revalidate',
@@ -89,14 +88,13 @@ public function adminedit()
     
             $userDetails = session('user');
     
-            // Check if the 'user' session key exists and is not null
+            
             if (!$userDetails || !isset($userDetails['userId'])) {
                 return back()->withErrors(['error' => 'User details not found in session']);
             }
     
             $userId = $userDetails['userId'];
     
-            // Use the correct endpoint for updating user profiles
             $response = $client->post("{$apiBaseUrl}/editAdmin", [
                 'json' => [
                     'id' => $userId,
@@ -111,7 +109,6 @@ public function adminedit()
             $responseData = json_decode($responseBody, true);
     
             if ($response->getStatusCode() == 200 && isset($responseData['succeeded']) && $responseData['succeeded']) {
-                // Update the user information in the session if needed
                 session(['user' => $responseData['data']['user']]);
     
                 return redirect()->route('home')->with('success', 'User profile updated successfully');
