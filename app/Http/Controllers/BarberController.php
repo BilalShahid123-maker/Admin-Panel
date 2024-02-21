@@ -18,7 +18,7 @@ class BarberController extends Controller
                 return back()->withErrors(['error' => 'Token not found']);
             }
             // Create a Guzzle client
-            $apiUrl = Config::get('app.barber_delete_api_url');
+            $apiUrl = config('app.barber_delete_api_url');
             $client = new Client();
 
             $response = $client->delete("{$apiUrl}?id={$id}", [
@@ -52,7 +52,7 @@ class BarberController extends Controller
                 return back()->withErrors(['error' => 'Token not found']);
             }
             // Create a Guzzle client
-            $apiUrl = Config::get('app.barber_approve_api_url');
+            $apiUrl = config('app.barber_approve_api_url');
             $client = new Client();
 
             $response = $client->post("{$apiUrl}?userId={$userId}", [
@@ -86,7 +86,7 @@ class BarberController extends Controller
                 return back()->withErrors(['error' => 'Token not found']);
             }
             
-            $apiUrl = Config::get('app.barber_block_api_url');
+            $apiUrl = config('app.barber_block_api_url');
             $client = new Client();
 
             $response = $client->post($apiUrl, [

@@ -27,9 +27,9 @@ class HomeController extends Controller
             return back()->withErrors(['error' => 'Token not found']);
         }
         
-        $barberUrl = Config::get('app.barber_api_url');
-        $clientUrl = Config::get('app.client_api_url');
-        $servicesUrl = Config::get('app.services_api_url');
+        $barberUrl = config('app.barber_api_url');
+        $clientUrl = config('app.client_api_url');
+        $servicesUrl = config('app.services_api_url');
         
         $requestBody = [
             'pageNo' => 1,
