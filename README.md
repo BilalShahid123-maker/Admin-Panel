@@ -1,2 +1,2 @@
-# Barber_admin-Laravel-
+# admin-Laravel-
 Laravel project 
